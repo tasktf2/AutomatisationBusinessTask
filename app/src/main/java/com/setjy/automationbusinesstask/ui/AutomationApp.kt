@@ -12,7 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -47,13 +47,13 @@ fun AutomationApp(
             modifier = modifier.padding(it)
         ) {
             composable(route = BottomMenu.Goods.name) {
-                val viewModel: GoodsViewModel = viewModel()
+                val viewModel: GoodsViewModel = hiltViewModel()
                 GoodsScreen(
                     uiState = viewModel.uiState,
                     onTryAgainClicked = { viewModel.getProducts() })
             }
             composable(route = BottomMenu.Stores.name) {
-                val viewModel: StoreViewModel = viewModel()
+                val viewModel: StoreViewModel = hiltViewModel()
                 StoreScreen(uiState = viewModel.uiState,
                     onTryAgainClicked = { viewModel.getStoreList() })
             }

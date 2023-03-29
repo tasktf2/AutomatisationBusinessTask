@@ -6,11 +6,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.setjy.automationbusinesstask.di.NetworkService
+import com.setjy.automationbusinesstask.domain.base.UseCase
 import com.setjy.automationbusinesstask.domain.model.Store
 import com.setjy.automationbusinesstask.ui.model.StoreUI
 import com.setjy.automationbusinesstask.ui.model.toUi
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 sealed class StoreState {
 
@@ -19,7 +21,11 @@ sealed class StoreState {
     object Error : StoreState()
 }
 
-class StoreViewModel : ViewModel() {
+@HiltViewModel
+class StoreViewModel @Inject constructor(
+    private val getStoreListUseCase: @JvmSuppressWildcards UseCase<Unit, List<Store>>
+) :
+    ViewModel() {
 
     var uiState: StoreState by mutableStateOf(StoreState.Loading)
         private set
@@ -32,7 +38,7 @@ class StoreViewModel : ViewModel() {
         viewModelScope.launch {
             uiState = StoreState.Loading
             uiState = try {
-                StoreState.Success(NetworkService.storeRepo.getStoreList().map(Store::toUi))
+                StoreState.Success(getStoreListUseCase.execute(Unit).map(Store::toUi))
             } catch (e: Exception) {
                 Log.d("StoreViewModel", e.stackTraceToString())
                 StoreState.Error

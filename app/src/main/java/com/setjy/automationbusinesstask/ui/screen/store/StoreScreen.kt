@@ -14,13 +14,14 @@ import com.setjy.automationbusinesstask.ui.screen.base.LoadingScreen
 
 
 @Composable
-fun StoreScreen(uiState: StoreState, onTryAgainClicked:()->Unit) {
+fun StoreScreen(uiState: StoreState, onTryAgainClicked: () -> Unit) {
     when (uiState) {
         StoreState.Error -> ErrorScreen(onTryAgainClicked = onTryAgainClicked)
         StoreState.Loading -> LoadingScreen()
         is StoreState.Success -> StoreSuccessScreen(storeList = uiState.storeList)
     }
 }
+
 @Composable
 fun StoreSuccessScreen(storeList: List<StoreUI>) {
     LazyColumn(
