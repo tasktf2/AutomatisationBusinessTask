@@ -36,22 +36,19 @@ val Typography = Typography(
     h1 = TextStyle(
         fontFamily = MontserratFontFamily,
         fontWeight = FontWeight.Bold,
-        fontSize = 26.sp,
-        color = Color.Black
+        fontSize = 26.sp
     ),
     //store name
     body1 = TextStyle(
         fontFamily = MontserratFontFamily,
         fontWeight = FontWeight.SemiBold,
         fontSize = 20.sp,
-        color = Color.Black
     ),
     //product
     body2 = TextStyle(
         fontFamily = MontserratFontFamily,
         fontWeight = FontWeight.SemiBold,
         fontSize = 12.sp,
-        color = Color.White
     ),
     //store address
     caption = TextStyle(
