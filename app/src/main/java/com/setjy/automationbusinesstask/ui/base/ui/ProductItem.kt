@@ -11,8 +11,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -30,10 +32,11 @@ fun ProductItem(cardItem: ProductUI) {
             .clip(MaterialTheme.shapes.small)
     ) {
         Image(
+            bitmap = cardItem.itemImage?.asImageBitmap()
+                ?: ImageBitmap.imageResource(id = R.drawable.ic_launcher_background),
             modifier = Modifier
                 .align(Alignment.Center)
                 .fillMaxSize(),
-            painter = painterResource(id = R.drawable.ic_launcher_background),
             contentDescription = null,
             contentScale = ContentScale.Crop
         )
@@ -72,6 +75,7 @@ private fun CardName(cardItem: ProductUI, modifier: Modifier) {
     Text(
         text = cardItem.itemName,
         style = MaterialTheme.typography.body2,
+        color = Color.White,
         modifier = modifier
             .padding(start = 10.dp)
             .fillMaxWidth(0.7f)
@@ -85,8 +89,10 @@ private fun CardPrice(cardItem: ProductUI, modifier: Modifier) {
         text = buildString {
             append(cardItem.itemPrice)
             append(" р.")
-        }, textAlign = TextAlign.End,
+        },
+        textAlign = TextAlign.End,
         style = MaterialTheme.typography.body2,
+        color = Color.White,
         fontSize = 10.sp,
         modifier = modifier
             .padding(top = 10.dp, end = 10.dp)

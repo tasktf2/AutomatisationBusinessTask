@@ -12,13 +12,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.style.TextAlign
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.setjy.automationbusinesstask.ui.screen.GoodsScreen
-import com.setjy.automationbusinesstask.ui.screen.StoresScreen
+import com.setjy.automationbusinesstask.ui.screen.goods.GoodsScreen
+import com.setjy.automationbusinesstask.ui.screen.goods.GoodsViewModel
+import com.setjy.automationbusinesstask.ui.screen.store.StoreScreen
+import com.setjy.automationbusinesstask.ui.screen.store.StoreViewModel
 import com.setjy.automationbusinesstask.ui.theme.DarkGray
 import com.setjy.automationbusinesstask.ui.theme.DarkGrayishBlue
 import com.setjy.automationbusinesstask.ui.theme.LightGrayishBlue
@@ -44,10 +47,15 @@ fun AutomationApp(
             modifier = modifier.padding(it)
         ) {
             composable(route = BottomMenu.Goods.name) {
-                GoodsScreen()
+                val viewModel: GoodsViewModel = viewModel()
+                GoodsScreen(
+                    uiState = viewModel.uiState,
+                    onTryAgainClicked = { viewModel.getProducts() })
             }
             composable(route = BottomMenu.Stores.name) {
-                StoresScreen()
+                val viewModel: StoreViewModel = viewModel()
+                StoreScreen(uiState = viewModel.uiState,
+                    onTryAgainClicked = { viewModel.getStoreList() })
             }
         }
     }

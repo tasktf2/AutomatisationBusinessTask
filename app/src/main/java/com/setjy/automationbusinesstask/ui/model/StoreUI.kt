@@ -1,5 +1,6 @@
 package com.setjy.automationbusinesstask.ui.model
 
+import com.setjy.automationbusinesstask.domain.model.Store
 import com.setjy.automationbusinesstask.ui.base.Item
 
 data class StoreUI(
@@ -8,3 +9,10 @@ data class StoreUI(
     val longitude: Double,
     val latitude: Double
 ) : Item
+
+fun Store.toUi() = StoreUI(
+    storeName = storeName,
+    storeAddress = storeAddress,
+    longitude = storeLongitude,
+    latitude = storeLatitude
+)
