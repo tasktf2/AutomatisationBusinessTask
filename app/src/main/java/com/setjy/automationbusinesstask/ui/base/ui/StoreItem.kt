@@ -5,15 +5,17 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
+@OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun StoreItem(storeName: String, storeAddress: String) {
-    Card(elevation = 4.dp) {
+fun StoreItem(storeName: String, storeAddress: String, onStoreClicked: () -> Unit) {
+    Card(elevation = 4.dp, onClick = onStoreClicked) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
