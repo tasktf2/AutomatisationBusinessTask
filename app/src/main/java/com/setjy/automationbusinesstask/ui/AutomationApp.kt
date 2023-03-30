@@ -55,7 +55,9 @@ fun AutomationApp(
             composable(route = BottomMenu.Stores.name) {
                 val viewModel: StoreViewModel = hiltViewModel()
                 StoreScreen(uiState = viewModel.uiState,
-                    onTryAgainClicked = { viewModel.getStoreList() })
+                    onTryAgainClicked = { viewModel.getStoreList() },
+                    onStoreClicked = { info -> viewModel.showMap(storeInfo = info) },
+                onBackToStoreListClicked = {viewModel.backToStoreList()})
             }
         }
     }
